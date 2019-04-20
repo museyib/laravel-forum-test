@@ -24,6 +24,7 @@
             @else
                 <div class="col-4">Main</div>
             @endif
+            <div class="col-1">{{ count($subforum->topics()->get()) }}</div>
         </div>
     @endforeach
 @endsection

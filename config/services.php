@@ -44,4 +44,10 @@ return [
         ],
     ],
 
+    'facebook' => [
+        'client_id' => '840892482942135',
+        'client_secret' => 'bb19962bb64315f942dc522b20371c36',
+        'redirect' => 'http://museyib.com/login/facebook/callback',
+    ],
+
 ];

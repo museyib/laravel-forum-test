@@ -17,4 +17,9 @@ class Post extends Model
     {
         return User::all()->where('id', $this->user_id)->first();
     }
+
+    public static function getById($id)
+    {
+        return Post::where('id', $id)->get()->first();
+    }
 }

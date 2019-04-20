@@ -30,7 +30,7 @@
     <div class="container my-2">
         @foreach($parent->topics as $topic)
             <div class="card-header py-2 my-2">
-                <a href="{{ route('topics.show', ['topic_id'=>$topic->id]) }}">{{ $topic->title }}</a>
+                <a href="{{ route('topics.show', ['topic'=>$topic, 'parent'=>$parent]) }}">{{ $topic->title }}</a>
                 <p class="card-subtitle text-muted pt-2">
                     Created by <strong>{{ $topic->user()->name }}</strong> at: {{ $topic->created_at }}</p>
                 <p class="card-subtitle text-muted">

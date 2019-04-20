@@ -14,22 +14,41 @@
             @else
                 @foreach($topic->posts as $post)
                    <div class="card my-2 p-2" id="post_{{ $post->id }}">
-
                        <div>
-                           {{ $post->content }}
-                           <a href="{{ route('topics.show', ['id'=>$topic->id]) }}/#post_{{$post->id}}"
-                              class="float-right">Link</a>
+                           <a href="{{ route('topics.show', ['parent'=>$parent,'topic'=>$topic]) }}/#post_{{$post->id}}"
+                              class="float-right btn btn-outline-primary">Link</a>
 
                            @if(Auth::check() && (Auth::user()->id==$post->user_id || Auth::user()->hasRole('admin')))
                                <a href="{{ action('PostController@edit', ['post'=>$post]) }}"
-                                  class="float-right">Edit&nbsp;</a>
+                                  class="float-right btn btn-outline-primary">Edit</a>
                            @endif
+
+                           @if(Auth::check())
+                               <a href="{{ action('PostController@reply', ['post'=>$post, 'topic'=>$topic]) }}"
+                                  class="float-right btn btn-outline-primary">Quote</a>
+                           @endif
+
                            @if(Auth::check() && Auth::user()->hasRole('admin'))
-                               <form action="{{ route('admin.posts.delete', ['post'=>$post]) }}" method="post">
+                               <form action="{{ route('admin.posts.delete', ['post'=>$post]) }}" method="post" class="form-inline float-right">
                                    @csrf
-                                   <button type="submit" class="btn-link float-right">Delete&nbsp;</button>
+                                   <button type="submit" class="btn btn-outline-danger">Delete</button>
                                </form>
                            @endif
+                       </div>
+
+                       <div class="my-2">
+                           @if(! is_null($post->reply_to))
+                               <div class="card-header">
+                                   {{ \App\Post::getById($post->reply_to)->content }}
+                                   <a href="{{ route('topics.show', ['parent'=>$parent,'topic'=>$topic]) }}/#post_{{\App\Post::getById($post->reply_to)->id}}"
+                                                                                        class="float-right">Link</a>
+                               </div>
+
+                           @endif
+                       </div>
+
+                       <div>
+                           {{ $post->content }}
                        </div>
 
                        <p class="card-subtitle text-muted pt-5">

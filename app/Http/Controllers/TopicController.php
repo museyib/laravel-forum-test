@@ -51,8 +51,10 @@ class TopicController extends Controller
 
         $post->save();
 
-        return redirect()->action('TopicController@show', ['id'=>$topic->id])
-            ->with('message', 'New topic created');
+        return redirect()->action('TopicController@show', [
+            'parent'=>Subforum::getById($topic->subforum_id),
+            'topic'=>$topic
+            ])->with('message', 'New topic created');
     }
 
     /**
@@ -61,11 +63,18 @@ class TopicController extends Controller
      * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($parent, $topic)
     {
-        $topic=Topic::all()->where('id', $id)->first();
-        $parent=Subforum::getById($topic->subforum_id);
-        return view('forum.topics.show', compact('topic', 'parent'));
+        try
+        {
+            $topic=Topic::where('id', $topic)->first();
+            $parent=Subforum::getById($parent);
+            return view('forum.topics.show', compact('topic', 'parent'));
+        }
+        catch (\Exception $exception)
+        {
+            abort(404);
+        }
     }
 
     /**

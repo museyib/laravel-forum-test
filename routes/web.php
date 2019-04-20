@@ -40,7 +40,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 
         Route::resource('subforums', 'SubforumController');
 
-        Route::get('/topics', 'TopicController@index')->name('admin.topics.index');
+        Route::get('/topics/', 'TopicController@index')->name('admin.topics.index');
         Route::get('/topics/{id?}', 'TopicController@show')->name('admin.topics.show');
         Route::get('/topics/{topic?}/edit', 'TopicController@edit')->name('admin.topics.edit');
         Route::post('/topics/{topic?}/edit', 'TopicController@update')->name('admin.topics.update');
@@ -57,6 +57,10 @@ Route::group(['prefix'=>'forum', 'middleware'=>'forum'], function ()
         Route::post('/posts/create', 'PostController@store')->name('posts.store');
         Route::get('/posts/{post?}/edit', 'PostController@edit')->name('posts.edit');
         Route::post('/posts/{post?}/edit', 'PostController@update')->name('posts.update');
+        Route::get('/topics/{topic?}/posts/{post?}/reply', 'PostController@reply')->name('posts.reply');
     });
 
-Route::get('/forum/topics/{id?}', 'TopicController@show')->name('topics.show');
+Route::get('/forum/{parent?}/topics/{topic?}', 'TopicController@show')->name('topics.show');
+
+Route::get('login/facebook', 'Auth\AuthController@redirectToFacebook');
+Route::get('login/facebook/callback', 'Auth\AuthController@getFacebookCallback');

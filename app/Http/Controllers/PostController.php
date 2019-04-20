@@ -8,96 +8,50 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function reply($topic, $post)
     {
-        //
+        return view('forum.topics.reply', compact('topic', 'post'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $post=new Post();
         $post->content=$request->get('content');
         $post->topic_id=$request->get('topic_id');
         $post->user_id=$request->get('user_id');
+        if (! is_null($request->get('reply_to')))
+        {
+            $post->reply_to=$request->get('reply_to');
+        }
         $post->save();
-        $topic=Topic::all()->where('id', $post->topic_id)->first();
+        $topic=Topic::where('id', $post->topic_id)->first();
         $topic->updated_at=new \DateTime();
         $topic->save();
 
-        return redirect()->action('TopicController@show', ['id'=>$post->topic_id]);
+        return redirect()->action('TopicController@show', ['topic'=>$post->topic_id, 'parent'=>$topic]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
     public function show(Post $post)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Post $post)
     {
         $subforum_id=$post->subforum_id;
         return view('forum.posts.edit', compact('post', 'subforum_id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Post $post)
     {
         $post->content=$request->get('content');
-//        $post->topic_id=$request->get('topic_id');
-//        $post->user_id=$request->get('user_id');
         $post->updated_at=new \DateTime();
         $post->update();
-//        $topic=Topic::all()->where('id', $post->topic_id)->first();
+        $topic=Topic::getById($post->topic_id);
 
-        return redirect()->action('TopicController@show', ['id'=>$post->topic_id]);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
-    {
-        //
+        return redirect()->action('TopicController@show', ['topic'=>$post->topic_id, 'parent'=>$topic->subforum_id]);
     }
 }

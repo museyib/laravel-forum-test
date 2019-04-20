@@ -5,8 +5,6 @@
         <h2>Edit post</h2>
         @include('message')
         <form action="{{ route('posts.update', ['post'=>$post]) }}" method="post">
-{{--            <label for="title">Title</label>--}}
-{{--            <input type="text" name="title" class="form-control" placeholder="Title" value="{{ old('title') }}">--}}
             @if($errors->first('title'))
                 <p class="alert alert-danger">{{ $errors->first('title') }}</p>
             @endif
