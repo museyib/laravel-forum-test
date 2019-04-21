@@ -34,7 +34,7 @@
                 <p class="card-subtitle text-muted pt-2">
                     Created by <strong>{{ $topic->user()->name }}</strong> at: {{ $topic->created_at }}</p>
                 <p class="card-subtitle text-muted">
-                    Last <a href="{{ route('topics.show', ['id'=>$topic->id]) }}#post_{{ $topic->lastPost()->id }}">
+                    Last <a href="{{ route('topics.show', ['parent'=>$parent->id,'topic'=>$topic->id]) }}#post_{{ $topic->lastPost()->id }}">
                         post</a> by <strong>{{ $topic->lastUser()->name }}</strong> at {{ $topic->updated_at }}</p>
             </div>
         @endforeach

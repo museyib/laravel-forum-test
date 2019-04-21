@@ -15,7 +15,9 @@
                 @foreach($topic->posts as $post)
                    <div class="card my-2 p-2" id="post_{{ $post->id }}">
                        <div>
-                           <a href="{{ route('topics.show', ['parent'=>$parent,'topic'=>$topic]) }}/#post_{{$post->id}}"
+                           <a href="{{ route('topics.show', [
+                                'parent'=>$parent,
+                                'topic'=>$topic]) }}/#post_{{$post->id}}"
                               class="float-right btn btn-outline-primary">Link</a>
 
                            @if(Auth::check() && (Auth::user()->id==$post->user_id || Auth::user()->hasRole('admin')))
@@ -39,11 +41,18 @@
                        <div class="my-2">
                            @if(! is_null($post->reply_to))
                                <div class="card-header">
+                                   <div><strong>Quoted:</strong></div>
                                    {{ \App\Post::getById($post->reply_to)->content }}
-                                   <a href="{{ route('topics.show', ['parent'=>$parent,'topic'=>$topic]) }}/#post_{{\App\Post::getById($post->reply_to)->id}}"
-                                                                                        class="float-right">Link</a>
+                                   <a href="{{ route('topics.show', [
+                                        'parent'=>$parent,
+                                        'topic'=>$topic])
+                                        }}/#post_{{\App\Post::getById($post->reply_to)->id}}"
+                                      class="float-right">Go to the post</a>
+                                   <div class="my-2">
+                                       <strong>Author:</strong>
+                                       {{ \App\Post::getById($post->reply_to)->user()->name }}
+                                   </div>
                                </div>
-
                            @endif
                        </div>
 

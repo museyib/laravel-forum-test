@@ -7,6 +7,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2> Role list </h2>
+                @include('message')
+                <a href="roles/create">Create new role</a>
             </div>
             @if (session('status'))
                 <div class="alert alert-success">
@@ -27,7 +29,7 @@
                     <tbody>
                     @foreach($roles as $role)
                         <tr>
-                            <td>{!! $role->name !!}</td>
+                            <td><a href="{{ route('roles.show', ['id'=>$role->id]) }}">{!! $role->name !!}</a></td>
                             <td>{!! $role->display_name !!}</td>
                             <td>{!! $role->description !!}</td>
                         </tr>

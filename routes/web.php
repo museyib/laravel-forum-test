@@ -31,6 +31,9 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
         Route::get('roles', 'RolesController@index')->name('roles.index');
         Route::get('roles/create', 'RolesController@create')->name('roles.create');
         Route::post('roles/create', 'RolesController@store')->name('roles.store');
+        Route::get('roles/{id?}', 'RolesController@show')->name('roles.show');
+        Route::get('roles/{id?}/edit', 'RolesController@edit')->name('roles.edit');
+        Route::post('roles/{id?}/delete', 'RolesController@destroy')->name('roles.delete');
 
         Route::get('users', 'UsersController@index')->name('users.index');
         Route::get('users/create', 'UsersController@create')->name('users.create');
