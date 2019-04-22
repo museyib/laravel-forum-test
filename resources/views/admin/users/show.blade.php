@@ -13,5 +13,15 @@
     <div>
         <p><strong>Name: </strong>{{ $user->name }}</p>
         <p><strong>Display name: </strong>{{ $user->email }}</p>
+        <div>
+            <strong>Roles:</strong>
+            @if(is_null($user->roles()))
+                <p>Not assigned any role</p>
+            @else
+                @foreach($user->roles()->get() as $role)
+                    <div>{{ $role->display_name }}</div>
+                @endforeach
+            @endif
+        </div>
     </div>
 @endsection

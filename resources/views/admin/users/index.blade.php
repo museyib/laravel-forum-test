@@ -7,12 +7,9 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h2> User list </h2>
+                @include('message')
+                <a href="roles/create">Create new role</a>
             </div>
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
             @if ($users->isEmpty())
                 <p> There is no role.</p>
             @else
@@ -26,7 +23,7 @@
                     <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td>{!! $user->name !!}</td>
+                            <td><a href="{{ route('users.show', ['user'=>$user]) }}">{!! $user->name !!}</a></td>
                             <td>{!! $user->email !!}</td>
                         </tr>
                     @endforeach

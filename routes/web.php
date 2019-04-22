@@ -31,15 +31,18 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
         Route::get('roles', 'RolesController@index')->name('roles.index');
         Route::get('roles/create', 'RolesController@create')->name('roles.create');
         Route::post('roles/create', 'RolesController@store')->name('roles.store');
-        Route::get('roles/{id?}', 'RolesController@show')->name('roles.show');
-        Route::get('roles/{id?}/edit', 'RolesController@edit')->name('roles.edit');
-        Route::post('roles/{id?}/delete', 'RolesController@destroy')->name('roles.delete');
+        Route::get('roles/{role?}', 'RolesController@show')->name('roles.show');
+        Route::get('roles/{role?}/edit', 'RolesController@edit')->name('roles.edit');
+        Route::post('roles/{role?}/edit', 'RolesController@update')->name('roles.update');
+        Route::post('roles/{role?}/delete', 'RolesController@destroy')->name('roles.delete');
 
         Route::get('users', 'UsersController@index')->name('users.index');
         Route::get('users/create', 'UsersController@create')->name('users.create');
         Route::post('users/create', 'UsersController@store')->name('users.store');
-        Route::get('users/{id?}/edit', 'UsersController@edit')->name('users.edit');
-        Route::post('users/{id?}/edit', 'UsersController@update')->name('users.update');
+        Route::get('users/{user?}', 'UsersController@show')->name('users.show');
+        Route::get('users/{user?}/edit', 'UsersController@edit')->name('users.edit');
+        Route::post('users/{user?}/edit', 'UsersController@update')->name('users.update');
+        Route::post('users/{user?}/delete', 'UsersController@destroy')->name('users.delete');
 
         Route::resource('subforums', 'SubforumController');
 

@@ -32,20 +32,18 @@ class RolesController extends Controller
         return redirect('admin/roles')->with('message', 'A new role has been created');
     }
 
-    public function show($id)
+    public function show(Role $role)
     {
-        return view('admin.roles.show', compact('id'));
+        return view('admin.roles.show', compact('role'));
     }
 
-    public function edit($id)
+    public function edit(Role $role)
     {
-        return view('admin.roles.edit', compact('id'));
+        return view('admin.roles.edit', compact('role'));
     }
 
-    public function update($id, Request $request)
+    public function update(Role $role, Request $request)
     {
-        $role=Role::where('id', $id);
-
         $role->name=$request->get('name');
         $role->display_name=$request->get('display_name');
         $role->description=$request->get('description');
@@ -55,9 +53,8 @@ class RolesController extends Controller
         return redirect('admin/roles')->with('message', 'A new role has been update');
     }
 
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        $role=Role::where('id', $id)->first();
         if ($role->name=='admin')
         {
             $roles=Role::all();

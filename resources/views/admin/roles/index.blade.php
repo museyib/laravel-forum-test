@@ -10,11 +10,6 @@
                 @include('message')
                 <a href="roles/create">Create new role</a>
             </div>
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
             @if ($roles->isEmpty())
                 <p> There is no role.</p>
             @else
@@ -29,7 +24,7 @@
                     <tbody>
                     @foreach($roles as $role)
                         <tr>
-                            <td><a href="{{ route('roles.show', ['id'=>$role->id]) }}">{!! $role->name !!}</a></td>
+                            <td><a href="{{ route('roles.show', ['role'=>$role]) }}">{!! $role->name !!}</a></td>
                             <td>{!! $role->display_name !!}</td>
                             <td>{!! $role->description !!}</td>
                         </tr>

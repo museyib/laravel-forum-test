@@ -83,8 +83,6 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
       <path value="$PROJECT_DIR$/vendor/psr/http-message" />
-      <path value="$PROJECT_DIR$/vendor/moontoast/math" />
-      <path value="$PROJECT_DIR$/vendor/laravel/telescope" />
       <path value="$PROJECT_DIR$/vendor/zizaco/entrust" />
       <path value="$PROJECT_DIR$/vendor/sunra/php-simple-html-dom-parser" />
       <path value="$PROJECT_DIR$/vendor/ammadeuss/laravel-html-dom-parser" />

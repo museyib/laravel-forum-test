@@ -31,8 +31,7 @@ class UsersController extends Controller
         $user->name=$request->get('name');
         $user->email=$request->get('email');
         $password=$request->get('password');
-
-        if($password!='')
+        if(is_null($password))
         {
             $user->password=Hash::make($password);
         }
@@ -40,5 +39,10 @@ class UsersController extends Controller
         $user->saveRoles($request->get('role'));
 
         return redirect(action('Admin\UsersController@edit', $user->id))->with('message', 'The user has been updated');
+    }
+
+    public function show(User $user)
+    {
+        return view('admin.users.show', compact('user'));
     }
 }
