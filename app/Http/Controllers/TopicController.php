@@ -9,32 +9,16 @@ use App\Topic;
 
 class TopicController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('forum.topics.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($subforum_id)
     {
         return view('forum.topics.create', compact('subforum_id'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(TopicFormRequest $request)
     {
         $topic=new Topic();
@@ -57,12 +41,6 @@ class TopicController extends Controller
             ])->with('message', 'New topic created');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
     public function show($parent, $topic)
     {
         try
@@ -77,35 +55,16 @@ class TopicController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Topic $topic)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
     public function update(TopicFormRequest $request, Topic $topic)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Topic $topic)
     {
         //

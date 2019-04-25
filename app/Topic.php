@@ -10,7 +10,7 @@ class Topic extends Model
 
     public function subforum()
     {
-        return $this->belongsTo(Subforum::class);
+        return $this->belongsTo(Subforum::class)->get()->first();
     }
 
     public function posts()

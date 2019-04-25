@@ -10,7 +10,7 @@ class Post extends Model
 
     public function topic()
     {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsTo(Topic::class)->get()->first();
     }
 
     public function user()
@@ -21,5 +21,10 @@ class Post extends Model
     public static function getById($id)
     {
         return Post::where('id', $id)->get()->first();
+    }
+
+    public function link()
+    {
+
     }
 }

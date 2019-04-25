@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Subforum;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -25,18 +26,14 @@ class PostController extends Controller
             $post->reply_to=$request->get('reply_to');
         }
         $post->save();
-        $topic=Topic::where('id', $post->topic_id)->first();
+        $topic=$post->topic();
         $topic->updated_at=new \DateTime();
         $topic->save();
 
-        return redirect()->action('TopicController@show', ['topic'=>$post->topic_id, 'parent'=>$topic]);
+        $parent=$topic->subforum();
+        return redirect(route('topics.show',
+                ['parent'=>$parent->id,'topic'=>$topic->id]).'#post_'. $post->id);
     }
-
-    public function show(Post $post)
-    {
-        //
-    }
-
 
     public function edit(Post $post)
     {
