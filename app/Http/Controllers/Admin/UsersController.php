@@ -16,6 +16,28 @@ class UsersController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+    public function create()
+    {
+        $roles=Role::all();
+        return view('admin.users.create', compact('roles'));
+    }
+
+    public function store(Request $request)
+    {
+        $user=new User();
+        $user->name=$request->get('name');
+        $user->email=$request->get('email');
+        $password=$request->get('password');
+        if(!is_null($password))
+        {
+            $user->password=Hash::make($password);
+        }
+        $user->save();
+        $user->saveRoles($request->get('role'));
+
+        return redirect('admin/users')->with('message', 'The user has been created');
+    }
+
     public function edit($id)
     {
         $user=User::whereId($id)->firstOrFail();
@@ -38,11 +60,20 @@ class UsersController extends Controller
         $user->save();
         $user->saveRoles($request->get('role'));
 
-        return redirect(action('Admin\UsersController@edit', $user->id))->with('message', 'The user has been updated');
+        return redirect('admin/users')->with('message', 'The user has been updated');
     }
 
     public function show(User $user)
     {
         return view('admin.users.show', compact('user'));
+    }
+
+    public function destroy($id)
+    {
+        User::find($id)->delete();
+
+        $users=User::all();
+
+        return redirect('admin/users')->with('message', 'The user has been deleted.');
     }
 }

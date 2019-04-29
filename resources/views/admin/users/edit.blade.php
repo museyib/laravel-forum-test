@@ -16,6 +16,7 @@
                 @endif{!! csrf_field() !!}
                     <fieldset>
                         <legend>Edit user</legend>
+                        @include('message')
                         <div class="form-group">
                             <label for="name" class="col-lg-2 control-label">Name</label>
                                 <div class="col-lg-10">
@@ -33,7 +34,7 @@
                         <div class="form-group">
                             <label for="role" class="col-lg-2 control-label">Role</label>
                                 <div class="col-lg-10">
-                                    <select class="form-control" id="role" name="role[]"multiple>
+                                    <select class="form-control" id="role" name="role[]" multiple>
                                         @foreach($roles as $role)
                                             <option value="{!! $role->id !!}"
                                                     @if(in_array($role->id, $selectedroles))
@@ -60,7 +61,7 @@
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <button type="reset" class="btn btn-default">Cancel</button>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </div>
                     </fieldset>

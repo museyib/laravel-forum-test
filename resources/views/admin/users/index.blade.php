@@ -8,7 +8,7 @@
             <div class="panel-heading">
                 <h2> User list </h2>
                 @include('message')
-                <a href="roles/create">Create new role</a>
+                <a href="users/create">Create new user</a>
             </div>
             @if ($users->isEmpty())
                 <p> There is no role.</p>

@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 Route::view('/','home');
 
 Auth::routes();
@@ -21,7 +24,6 @@ Route::post('/contact', 'ContactFormController@store')->name('contact.store');
 
 Route::view('/about', 'about');
 
-Route::resource('customers', 'CustomerController');
 Route::get('forum', 'ForumController@index');
 Route::get('forum/{id?}', 'ForumController@show')->name('forum.show');
 
