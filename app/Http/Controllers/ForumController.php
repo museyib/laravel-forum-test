@@ -19,7 +19,7 @@ class ForumController extends Controller
         {
             $parent=Subforum::where('id', $id)->first();
             $level=$parent->level;
-            $subforums=Subforum::where('parent_id', $parent->id);
+            $subforums=Subforum::where('parent_id', $parent->id)->get();
             return view('forum.show', compact('subforums', 'level', 'parent'));
         }
         catch (\Exception $exception)
