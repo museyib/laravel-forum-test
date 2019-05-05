@@ -10,7 +10,7 @@ class Topic extends Model
 
     public function subforum()
     {
-        return $this->belongsTo(Subforum::class)->get()->first();
+        return $this->belongsTo(Subforum::class);
     }
 
     public function posts()
@@ -20,12 +20,12 @@ class Topic extends Model
 
     public static function getById($id)
     {
-        return Topic::all()->where('id', $id)->first();
+        return Topic::where('id', $id)->first();
     }
 
     public function user()
     {
-        return User::all()->where('id', $this->user_id)->first();
+        return $this->belongsTo(User::class);
     }
 
     public function lastUser()

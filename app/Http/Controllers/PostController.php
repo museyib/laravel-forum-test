@@ -9,46 +9,47 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function reply($topic, $post)
+    public function reply($subforum, $topic, $post)
     {
-        return view('forum.topics.reply', compact('topic', 'post'));
+        return view('forum.topics.reply', compact( 'subforum','topic', 'post'));
     }
 
 
-    public function store(Request $request)
+    public function store()
     {
-        $post=new Post();
-        $post->content=$request->get('content');
-        $post->topic_id=$request->get('topic_id');
-        $post->user_id=$request->get('user_id');
-        if (! is_null($request->get('reply_to')))
-        {
-            $post->reply_to=$request->get('reply_to');
-        }
-        $post->save();
-        $topic=$post->topic();
+        $post=Post::create(request()->validate([
+            'content'=>'required',
+            'topic_id'=>'required',
+            'user_id'=>'required',
+            'reply_to'=>'sometimes'
+
+        ]));
+        $topic=$post->topic;
         $topic->updated_at=new \DateTime();
         $topic->save();
 
-        $parent=$topic->subforum();
+        $parent=$topic->subforum;
         return redirect(route('topics.show',
                 ['parent'=>$parent->id,'topic'=>$topic->id]).'#post_'. $post->id);
     }
 
-    public function edit(Post $post)
+    public function edit(Subforum $subforum, Post $post)
     {
-        $subforum_id=$post->subforum_id;
-        return view('forum.posts.edit', compact('post', 'subforum_id'));
+        return view('forum.posts.edit', compact('post'));
     }
 
 
-    public function update(Request $request, Post $post)
+    public function update(Post $post)
     {
-        $post->content=$request->get('content');
+        $post->update(\request()->validate([
+            'content'=>'required'
+        ]));
         $post->updated_at=new \DateTime();
         $post->update();
-        $topic=Topic::getById($post->topic_id);
 
-        return redirect()->action('TopicController@show', ['topic'=>$post->topic_id, 'parent'=>$topic->subforum_id]);
+        $topic=$post->topic;
+        $parent=$topic->subforum;
+        return redirect(route('topics.show',
+                ['parent'=>$parent->id,'topic'=>$topic->id]).'#post_'. $post->id);
     }
 }

@@ -21,12 +21,12 @@
                               class="float-right btn btn-outline-primary">Link</a>
 
                            @if(Auth::check() && (Auth::user()->id==$post->user_id || Auth::user()->hasRole('admin')))
-                               <a href="{{ action('PostController@edit', ['post'=>$post]) }}"
+                               <a href="{{ route('posts.edit', ['subforum'=>$parent, 'post'=>$post]) }}"
                                   class="float-right btn btn-outline-primary">Edit</a>
                            @endif
 
                            @if(Auth::check())
-                               <a href="{{ action('PostController@reply', ['post'=>$post, 'topic'=>$topic]) }}"
+                               <a href="{{ route('posts.reply', ['subforum'=>$parent, 'topic'=>$topic, 'post'=>$post]) }}"
                                   class="float-right btn btn-outline-primary">Quote</a>
                            @endif
 
@@ -50,7 +50,7 @@
                                       class="float-right">Go to the post</a>
                                    <div class="my-2">
                                        <strong>Author:</strong>
-                                       {{ \App\Post::getById($post->reply_to)->user()->name }}
+                                       {{ \App\Post::getById($post->reply_to)->user->name }}
                                    </div>
                                </div>
                            @endif
@@ -61,7 +61,7 @@
                        </div>
 
                        <p class="card-subtitle text-muted pt-5">
-                           Posted by <strong>{{ $post->user()->name }}</strong> at {{ $post->created_at }}</p>
+                           Posted by <strong>{{ $post->user->name }}</strong> at {{ $post->created_at }}</p>
                        @if($post->updated_at!=$post->created_at)
                            <p class="card-subtitle text-muted">
                                Edited at {{ $post->updated_at }}</p>

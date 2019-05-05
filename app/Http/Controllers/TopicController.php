@@ -54,19 +54,4 @@ class TopicController extends Controller
             abort(404);
         }
     }
-
-    public function edit(Topic $topic)
-    {
-        //
-    }
-
-    public function update(TopicFormRequest $request, Topic $topic)
-    {
-        //
-    }
-
-    public function destroy(Topic $topic)
-    {
-        //
-    }
 }

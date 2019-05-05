@@ -60,12 +60,13 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 
 Route::group(['prefix'=>'forum', 'middleware'=>'forum'], function ()
     {
-        Route::get('/{id?}/topics/create', 'TopicController@create')->name('topics.create');
+        Route::get('/{subforum?}/topics/create', 'TopicController@create')->name('topics.create');
         Route::post('/topics/create', 'TopicController@store')->name('topics.store');
         Route::post('/posts/create', 'PostController@store')->name('posts.store');
-        Route::get('/posts/{post?}/edit', 'PostController@edit')->name('posts.edit');
+        Route::get('{subforum?}/posts/{post?}/edit', 'PostController@edit')->name('posts.edit');
         Route::post('/posts/{post?}/edit', 'PostController@update')->name('posts.update');
-        Route::get('/topics/{topic?}/posts/{post?}/reply', 'PostController@reply')->name('posts.reply');
+        Route::get('{subforum?}/topics/{topic?}/posts/{post?}/reply', 'PostController@reply')
+            ->name('posts.reply');
     });
 
 Route::get('/forum/{parent?}/topics/{topic?}', 'TopicController@show')->name('topics.show');

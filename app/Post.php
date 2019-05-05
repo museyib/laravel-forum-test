@@ -10,12 +10,12 @@ class Post extends Model
 
     public function topic()
     {
-        return $this->belongsTo(Topic::class)->get()->first();
+        return $this->belongsTo(Topic::class);
     }
 
     public function user()
     {
-        return User::all()->where('id', $this->user_id)->first();
+        return $this->belongsTo(User::class);
     }
 
     public static function getById($id)
