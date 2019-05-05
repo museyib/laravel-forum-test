@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Role;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class RolesController extends Controller
@@ -19,15 +18,13 @@ class RolesController extends Controller
         return view('admin.roles.create');
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $role=new Role([
-            'name'=>$request->get('name'),
-            'display_name'=>$request->get('display_name'),
-            'description'=>$request->get('description')
-        ]);
-
-        $role->save();
+        Role::create(request()->validate([
+            'name'=>'required|min:3',
+            'display_name'=>'required|min:3',
+            'description'=>'required|min:10'
+        ]));
 
         return redirect('admin/roles')->with('message', 'A new role has been created');
     }
@@ -42,15 +39,15 @@ class RolesController extends Controller
         return view('admin.roles.edit', compact('role'));
     }
 
-    public function update(Role $role, Request $request)
+    public function update(Role $role)
     {
-        $role->name=$request->get('name');
-        $role->display_name=$request->get('display_name');
-        $role->description=$request->get('description');
+        $role::update(request()->validate([
+            'name'=>'required|min:3',
+            'display_name'=>'required|min:3',
+            'description'=>'required|min:10'
+        ]));
 
-        $role->save();
-
-        return redirect('admin/roles')->with('message', 'A new role has been update');
+        return redirect('admin/roles')->with('message', 'The role has been updated');
     }
 
     public function destroy(Role $role)
@@ -63,6 +60,6 @@ class RolesController extends Controller
         }
         $role->delete();
 
-        return redirect('admin/roles/index')->with('message', 'A new role has been deleted');
+        return redirect('admin/roles')->with('message', 'The role has been deleted');
     }
 }

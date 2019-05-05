@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <h1>Details for {{ $topic->title }}</h1>
-            <p><a href="{{ route('admin.topics.edit', ['topic'=>$topic]) }}">Edit</a></p>
+            <a href="{{ route('admin.topics.edit', ['topic'=>$topic]) }}" class="btn btn-primary">Edit</a>
 
             <form action="{{ route('admin.topics.delete', ['topic'=>$topic])}}" method="post">
                 @csrf

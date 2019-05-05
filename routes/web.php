@@ -49,7 +49,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
         Route::resource('subforums', 'SubforumController');
 
         Route::get('topics', 'TopicController@index')->name('admin.topics.index');
-        Route::get('topics/{id?}', 'TopicController@show')->name('admin.topics.show');
+        Route::get('topics/{topic?}', 'TopicController@show')->name('admin.topics.show');
         Route::get('topics/{topic?}/edit', 'TopicController@edit')->name('admin.topics.edit');
         Route::post('topics/{topic?}/edit', 'TopicController@update')->name('admin.topics.update');
         Route::post('topics/{topic?}/delete', 'TopicController@destroy')->name('admin.topics.delete');

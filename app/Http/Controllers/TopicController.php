@@ -35,7 +35,7 @@ class TopicController extends Controller
 
         $post->save();
 
-        return redirect()->action('TopicController@show', [
+        return view('forum.topics.show', [
             'parent'=>Subforum::find($topic->subforum_id),
             'topic'=>$topic
             ])->with('message', 'New topic created');

@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\TopicFormRequest;
 use App\Subforum;
 use App\Topic;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TopicController extends Controller
@@ -13,34 +11,38 @@ class TopicController extends Controller
     public function index()
     {
         $topics=Topic::all();
+
         return view('admin.topics.index', compact('topics'));
     }
 
-    public function show($id)
+    public function show(Topic $topic)
     {
-        $topic=Topic::getById($id);
-        $parent=Subforum::getById($topic->subforum_id);
+        $parent=Subforum::find($topic->subforum_id);
+
         return view('admin.topics.show', compact('topic', 'parent'));
     }
 
     public function edit(Topic $topic)
     {
         $subforums=Subforum::all();
+
         return view('admin.topics.edit', compact('topic', 'subforums'));
     }
 
-    public function update(TopicFormRequest $request, Topic $topic)
+    public function update(Topic $topic)
     {
-        $topic->title=$request->get('title');
-        $topic->subforum_id=$request->get('subforum_id');
+        $topic->update(request()->validate([
+            'title'=>'required|min:3',
+            'subforum_id'=>'required'
+        ]));
 
-        $topic->update();
-        return redirect('admin/topics')->with('message', 'Topic updated');
+        return redirect('admin/topics')->with('message', 'The topic has been updated');
     }
 
     public function destroy(Topic $topic)
     {
         $topic->delete();
-        return redirect('admin/topics')->with('message', 'Topic deleted');
+
+        return redirect('admin/topics')->with('message', 'The topic has been deleted');
     }
 }
