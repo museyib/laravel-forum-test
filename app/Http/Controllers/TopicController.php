@@ -14,9 +14,9 @@ class TopicController extends Controller
         return view('forum.topics.index');
     }
 
-    public function create($subforum_id)
+    public function create(Subforum $parent)
     {
-        return view('forum.topics.create', compact('subforum_id'));
+        return view('forum.topics.create', compact('parent'));
     }
 
     public function store(TopicFormRequest $request)
@@ -36,7 +36,7 @@ class TopicController extends Controller
         $post->save();
 
         return redirect()->action('TopicController@show', [
-            'parent'=>Subforum::getById($topic->subforum_id),
+            'parent'=>Subforum::find($topic->subforum_id),
             'topic'=>$topic
             ])->with('message', 'New topic created');
     }
@@ -46,7 +46,7 @@ class TopicController extends Controller
         try
         {
             $topic=Topic::where('id', $topic)->first();
-            $parent=Subforum::getById($parent);
+            $parent=Subforum::find($parent);
             return view('forum.topics.show', compact('topic', 'parent'));
         }
         catch (\Exception $exception)

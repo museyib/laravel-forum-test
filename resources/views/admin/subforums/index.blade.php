@@ -20,7 +20,7 @@
             <div class="col-1">{{ $subforum->id }}</div>
             <div class="col-4"><a href="/admin/subforums/{{ $subforum->id }}">{{ $subforum->name }}</a></div>
             @if($subforum->parent_id!=0)
-                <div class="col-4">{{ \App\Subforum::getById($subforum->parent_id)->name }}</div>
+                <div class="col-4">{{ \App\Subforum::find($subforum->parent_id)->name }}</div>
             @else
                 <div class="col-4">Main</div>
             @endif

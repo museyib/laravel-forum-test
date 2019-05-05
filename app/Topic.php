@@ -18,11 +18,6 @@ class Topic extends Model
         return $this->hasMany(Post::class)->orderBy('updated_at');
     }
 
-    public static function getById($id)
-    {
-        return Topic::where('id', $id)->first();
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -13,10 +13,10 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        $topic=Topic::getById($post->topic_id);
+        $topic=Topic::find($post->topic_id);
         if (count($topic->posts()->get())>0)
         {
-            $parent=Subforum::getById($topic->subforum_id);
+            $parent=Subforum::find($topic->subforum_id);
             return redirect(action('TopicController@show', ['topic'=>$topic, 'parent'=>$parent]))
                 ->with('message', 'Post has been deleted');
         }

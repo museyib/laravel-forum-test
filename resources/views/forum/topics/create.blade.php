@@ -2,10 +2,7 @@
 @section('title', 'Create new topic')
 @section('content')
    <div class="container">
-       <a href="/forum">Main</a>
-       @foreach(\App\Subforum::getParents($subforum_id) as $parentsub)
-           / <a href="/forum/{{ $parentsub->id }}">{{ $parentsub->name }}</a>
-       @endforeach
+       @include('forum.forum-nav')
        <h2>Create new topic</h2>
        <form action="{{ route('topics.store') }}" method="post">
            <label for="title">Title</label>
@@ -20,7 +17,7 @@
            @if($errors->first('title'))
                <p class="alert alert-danger">{{ $errors->first('content') }}</p>
            @endif
-           <input type="hidden" name="subforum_id" value="{{ $subforum_id }}">
+           <input type="hidden" name="subforum_id" value="{{ $parent->id }}">
            <input type="hidden" name="user_id" value="{{ Auth::user()->id}}">
            <button type="submit" class="btn btn-outline-primary">Create</button>
            @csrf

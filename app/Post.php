@@ -18,11 +18,6 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function getById($id)
-    {
-        return Post::where('id', $id)->get()->first();
-    }
-
     public function link()
     {
 

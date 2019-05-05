@@ -25,7 +25,7 @@ Route::post('/contact', 'ContactFormController@store')->name('contact.store');
 Route::view('/about', 'about');
 
 Route::get('forum', 'ForumController@index');
-Route::get('forum/{id?}', 'ForumController@show')->name('forum.show');
+Route::get('forum/{parent?}', 'ForumController@show')->name('forum.show');
 
 Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], function ()
     {
@@ -60,7 +60,7 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Admin', 'middleware'=>'admin'], f
 
 Route::group(['prefix'=>'forum', 'middleware'=>'forum'], function ()
     {
-        Route::get('/{subforum?}/topics/create', 'TopicController@create')->name('topics.create');
+        Route::get('/{parent?}/topics/create', 'TopicController@create')->name('topics.create');
         Route::post('/topics/create', 'TopicController@store')->name('topics.store');
         Route::post('/posts/create', 'PostController@store')->name('posts.store');
         Route::get('{subforum?}/posts/{post?}/edit', 'PostController@edit')->name('posts.edit');

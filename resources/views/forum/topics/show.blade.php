@@ -2,13 +2,15 @@
 @section('title', 'Topic: '.$topic->title)
 @section('content')
     <div class="container">
-        <a href="/forum">Main</a>
-        @foreach(\App\Subforum::getParents($parent->id) as $parentsub)
-            / <a href="/forum/{{ $parentsub->id }}">{{ $parentsub->name }}</a>
-        @endforeach
+
+        @include('forum.forum-nav')
+
         @include('message')
         <ul class="list-group m-4">
             <h2>{{ $topic->title }}</h2>
+
+            @include('errors')
+
             @if($topic->posts->first()==null)
                 There's no reply
             @else
@@ -31,7 +33,8 @@
                            @endif
 
                            @if(Auth::check() && Auth::user()->hasRole('admin'))
-                               <form action="{{ route('admin.posts.delete', ['post'=>$post]) }}" method="post" class="form-inline float-right">
+                               <form action="{{ route('admin.posts.delete', ['post'=>$post]) }}" method="post"
+                                     class="form-inline float-right">
                                    @csrf
                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
                                </form>
@@ -42,16 +45,20 @@
                            @if(! is_null($post->reply_to))
                                <div class="card-header">
                                    <div><strong>Quoted:</strong></div>
-                                   {{ \App\Post::getById($post->reply_to)->content }}
-                                   <a href="{{ route('topics.show', [
-                                        'parent'=>$parent,
-                                        'topic'=>$topic])
-                                        }}/#post_{{\App\Post::getById($post->reply_to)->id}}"
-                                      class="float-right">Go to the post</a>
-                                   <div class="my-2">
-                                       <strong>Author:</strong>
-                                       {{ \App\Post::getById($post->reply_to)->user->name }}
-                                   </div>
+                                   @if(!is_null(\App\Post::find($post->reply_to)))
+                                       {{ \App\Post::find($post->reply_to)->content }}
+                                       <a href="{{ route('topics.show', [
+                                            'parent'=>$parent,
+                                            'topic'=>$topic])
+                                            }}/#post_{{\App\Post::find($post->reply_to)->id}}"
+                                          class="float-right">Go to the post</a>
+                                       <div class="my-2">
+                                           <strong>Author:</strong>
+                                           {{ \App\Post::find($post->reply_to)->user->name }}
+                                       </div>
+                                       @else
+                                       <span class="alert-warning">This post is deleted</span>
+                                   @endif
                                </div>
                            @endif
                        </div>

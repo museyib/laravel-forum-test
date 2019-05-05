@@ -14,18 +14,19 @@ class Subforum extends Model
         return $this->hasMany(Topic::class)->orderByDesc('updated_at');
     }
 
-    public static function getParent($level)
+    public function parent()
     {
-        return Subforum::all()->where('parent_id', Subforum::getByLevel($level))->first();
+        return Subforum::where('parent_id', Subforum::getByLevel($this->level))->first();
     }
 
-    public static function getParents($id)
+    public function parents()
     {
+        $id=$this->id;
         $data=array();
-        $level=Subforum::getById($id)->level;
+        $level=$this->level;
         while($level>0)
         {
-            $subforum=Subforum::getById($id);
+            $subforum=Subforum::find($id);
             $id=$subforum->parent_id;
 
             array_unshift($data, $subforum);
@@ -34,19 +35,14 @@ class Subforum extends Model
         return new Collection($data);
     }
 
-    public function getChilds()
+    public function childs()
     {
-        $data=Subforum::all()->where('parent_id', $this->id);
+        $data=Subforum::where('parent_id', $this->id)->get();
         return new Collection($data);
-    }
-
-    public static function getById($id)
-    {
-        return Subforum::all()->where('id', $id)->first();
     }
 
     public static function getByLevel($level)
     {
-        return Subforum::all()->where('level', $level)->first();
+        return Subforum::where('level', $level)->first();
     }
 }

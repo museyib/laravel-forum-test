@@ -2,7 +2,6 @@
 @section('title', 'Subforum: '.$parent->name)
 @section('content')
     <div class="container">
-        <a href="/forum">Main</a>
 
         @include('forum.forum-nav')
 
@@ -11,7 +10,7 @@
         @include('forum.subforums')
     </div>
     @auth
-        <a href="{{ route('topics.create', ['subforum_id'=>$parent->id]) }}"
+        <a href="{{ route('topics.create', ['parent'=>$parent]) }}"
            class="btn btn-outline-primary my-2">Create new topic</a>
     @endauth
     @if(count($parent->topics)>0)

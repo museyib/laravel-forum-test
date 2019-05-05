@@ -13,11 +13,10 @@ class ForumController extends Controller
         return view('forum.index', compact('subforums', 'level'));
     }
 
-    public function show($id)
+    public function show(Subforum $parent)
     {
         try
         {
-            $parent=Subforum::where('id', $id)->first();
             $level=$parent->level;
             $subforums=Subforum::where('parent_id', $parent->id)->get();
             return view('forum.show', compact('subforums', 'level', 'parent'));

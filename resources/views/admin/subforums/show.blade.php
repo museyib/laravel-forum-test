@@ -19,7 +19,7 @@
             <p><strong>Name: </strong>{{ $subforum->name }}</p>
             <p><strong>Parent subforum: </strong>
                 @if($subforum->parent_id!=0)
-                    {{ $subforum->name }}
+                    {{ $subforum->parent()->name }}
                 @else
                     Main
                 @endif

@@ -5,7 +5,7 @@
     @auth
         <div class="card my-2 p-2">
             <div>
-                "{{ \App\Post::getById($post)->content }}"
+                "{{ \App\Post::find($post)->content }}"
             </div>
         </div>
         <form action="{{ route('posts.store') }}" method="post">
