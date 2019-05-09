@@ -19,23 +19,21 @@ class TopicController extends Controller
         return view('forum.topics.create', compact('parent'));
     }
 
-    public function store(TopicFormRequest $request)
+    public function store()
     {
-        $topic=new Topic();
-        $topic->title=$request->get('title');
-        $topic->subforum_id=$request->get('subforum_id');
-        $topic->user_id=$request->get('user_id');
+        $topic=Topic::create(request()->validate([
+            'title'=>'required|min:3',
+            'subforum_id'=>'required',
+            'user_id'=>'required'
+        ]));
 
-        $topic->save();
+        Post::create([
+           'content'=>request('content'),
+           'topic_id'=>$topic->id,
+           'user_id'=>request('user_id')
+        ]);
 
-        $post=new Post();
-        $post->content=$request->get('content');
-        $post->topic_id=$topic->id;
-        $post->user_id=$topic->user_id;
-
-        $post->save();
-
-        return view('forum.topics.show', [
+        return redirect()->route('topics.show', [
             'parent'=>Subforum::find($topic->subforum_id),
             'topic'=>$topic
             ])->with('message', 'New topic created');
@@ -43,15 +41,8 @@ class TopicController extends Controller
 
     public function show($parent, $topic)
     {
-        try
-        {
-            $topic=Topic::where('id', $topic)->first();
-            $parent=Subforum::find($parent);
-            return view('forum.topics.show', compact('topic', 'parent'));
-        }
-        catch (\Exception $exception)
-        {
-            abort(404);
-        }
+        $topic=Topic::where('id', $topic)->first();
+        $parent=Subforum::find($parent);
+        return view('forum.topics.show', compact('topic', 'parent'));
     }
 }

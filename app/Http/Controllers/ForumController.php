@@ -15,15 +15,8 @@ class ForumController extends Controller
 
     public function show(Subforum $parent)
     {
-        try
-        {
-            $level=$parent->level;
-            $subforums=Subforum::where('parent_id', $parent->id)->get();
-            return view('forum.show', compact('subforums', 'level', 'parent'));
-        }
-        catch (\Exception $exception)
-            {
-                abort(404);
-            }
+        $level=$parent->level;
+        $subforums=Subforum::where('parent_id', $parent->id)->get();
+        return view('forum.show', compact('subforums', 'level', 'parent'));
     }
 }

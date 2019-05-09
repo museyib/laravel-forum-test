@@ -11,10 +11,15 @@
 |
 */
 
+use App\Services\Twitter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::view('/','home');
+Route::get('/', 'HomeController@index');
+Route::get('/twitter', function (Twitter $twitter)
+{
+    dd($twitter);
+});
 
 Auth::routes();
 

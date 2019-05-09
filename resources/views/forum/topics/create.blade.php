@@ -19,6 +19,9 @@
            @endif
            <input type="hidden" name="subforum_id" value="{{ $parent->id }}">
            <input type="hidden" name="user_id" value="{{ Auth::user()->id}}">
+
+           @include('errors')
+
            <button type="submit" class="btn btn-outline-primary">Create</button>
            @csrf
        </form>

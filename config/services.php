@@ -50,4 +50,9 @@ return [
         'redirect' => 'http://museyib.com/login/facebook/callback',
     ],
 
+    'twitter'=> [
+        'key'=>env('TWITTER_KEY'),
+        'secret'=>env('TWITTER_SECRET'),
+    ],
+
 ];

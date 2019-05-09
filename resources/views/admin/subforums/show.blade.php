@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
             <h1>Details for {{ $subforum->name }}</h1>
-            <p><a href="/admin/subforums/{{ $subforum->id }}/edit">Edit</a></p>
+            <a href="/admin/subforums/{{ $subforum->id }}/edit" class="btn btn-primary">Edit</a>
 
             <form action="/admin/subforums/{{ $subforum->id }}" method="post">
                 @method('DELETE')

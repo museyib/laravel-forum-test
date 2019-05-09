@@ -75,8 +75,12 @@ class SubforumController extends Controller
 
     public function destroy(Subforum $subforum)
     {
-        foreach ($subforum->getChilds() as $child)
+        foreach ($subforum->Childs() as $child)
         {
+            if (count($child->childs())>0)
+            {
+                $this->destroy($child);
+            }
             $child->delete();
         }
         $subforum->delete();

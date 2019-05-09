@@ -16,7 +16,7 @@ class Subforum extends Model
 
     public function parent()
     {
-        return Subforum::where('parent_id', Subforum::getByLevel($this->level))->first();
+        return Subforum::find($this->parent_id);
     }
 
     public function parents()
@@ -39,10 +39,5 @@ class Subforum extends Model
     {
         $data=Subforum::where('parent_id', $this->id)->get();
         return new Collection($data);
-    }
-
-    public static function getByLevel($level)
-    {
-        return Subforum::where('level', $level)->first();
     }
 }
