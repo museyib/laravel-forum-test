@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="0ce5f23c-7406-42d6-93a4-781fa0ae7f6f" name="Default Changelist" comment="Latest updates">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7a50e4c2-3e5e-4adf-affe-c4863e44d6ab.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7a50e4c2-3e5e-4adf-affe-c4863e44d6ab.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/laravel.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/laravel.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,34 +55,6 @@
         <option value="composer.json" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>@extends('layouts.app')</find>
-      <find>@extends('layout')</find>
-      <find>‘</find>
-      <find>’</find>
-      <find>get</find>
-      <find>Forum</find>
-      <find>$forum</find>
-      <find>pol</find>
-      <find>toJson</find>
-      <find>all</find>
-      <find>all(</find>
-      <find>mysql</find>
-      <find>new</find>
-      <find>connection</find>
-      <find>jquery</find>
-      <find>tar</find>
-      <find>auth</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-      <replace>@extends('layouts.app')</replace>
-      <replace>'</replace>
-      <replace>Subforum</replace>
-      <replace>$subforum</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -309,8 +307,16 @@
       <workItem from="1557422315863" duration="18000" />
       <workItem from="1557425675549" duration="2921000" />
       <workItem from="1557508799175" duration="2122000" />
-      <workItem from="1613323865772" duration="4710000" />
+      <workItem from="1613323865772" duration="5577000" />
     </task>
+    <task id="LOCAL-00001" summary="Latest updates">
+      <created>1613329081555</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1613329081555</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -324,6 +330,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Latest updates" />
@@ -358,22 +375,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="619" y="196" width="424" height="478" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1613324484069" />
-    <state width="1558" height="213" key="GridCell.Tab.0.bottom" timestamp="1613328831746">
+    <state width="1558" height="212" key="GridCell.Tab.0.bottom" timestamp="1613329666703">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="213" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1613328831746" />
-    <state width="1558" height="213" key="GridCell.Tab.0.center" timestamp="1613328831746">
+    <state width="1558" height="212" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1613329666703" />
+    <state width="1558" height="212" key="GridCell.Tab.0.center" timestamp="1613329666703">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="213" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1613328831746" />
-    <state width="1558" height="213" key="GridCell.Tab.0.left" timestamp="1613328831745">
+    <state width="1558" height="212" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1613329666703" />
+    <state width="1558" height="212" key="GridCell.Tab.0.left" timestamp="1613329666702">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="213" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1613328831745" />
-    <state width="1558" height="213" key="GridCell.Tab.0.right" timestamp="1613328831746">
+    <state width="1558" height="212" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1613329666702" />
+    <state width="1558" height="212" key="GridCell.Tab.0.right" timestamp="1613329666703">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1558" height="213" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1613328831746" />
+    <state width="1558" height="212" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1613329666703" />
     <state width="1558" height="269" key="GridCell.Tab.1.bottom" timestamp="1613328369497">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -406,5 +423,9 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1558" height="269" key="GridCell.Tab.2.right/0.0.1600.860@0.0.1600.860" timestamp="1613328369498" />
+    <state x="395" y="165" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1613329088338">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="395" y="165" width="800" height="522" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1613329088338" />
   </component>
 </project>
