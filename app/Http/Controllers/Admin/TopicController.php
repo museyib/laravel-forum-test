@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Subforum;
 use App\Topic;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class TopicController extends Controller
 {
@@ -41,7 +42,11 @@ class TopicController extends Controller
 
     public function destroy(Topic $topic)
     {
-        $topic->delete();
+        try {
+            $topic->delete();
+        } catch (Exception $e) {
+            return redirect('admin/topics')->with('message', 'Something went wrong!');
+        }
 
         return redirect('admin/topics')->with('message', 'The topic has been deleted');
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Role;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class RolesController extends Controller
 {
@@ -41,7 +42,7 @@ class RolesController extends Controller
 
     public function update(Role $role)
     {
-        $role::update(request()->validate([
+        $role->update(request()->validate([
             'name'=>'required|min:3',
             'display_name'=>'required|min:3',
             'description'=>'required|min:10'
@@ -54,11 +55,14 @@ class RolesController extends Controller
     {
         if ($role->name=='admin')
         {
-            $roles=Role::all();
             return redirect('admin/roles')
                 ->with('warning', 'This is "Admin" role. You can\'t delete this.');
         }
-        $role->delete();
+        try {
+            $role->delete();
+        } catch (Exception $e) {
+            return redirect('admin/roles')->with('message', 'Something went wrong');
+        }
 
         return redirect('admin/roles')->with('message', 'The role has been deleted');
     }

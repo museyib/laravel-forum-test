@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Subforum;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 
 class SubforumController extends Controller
@@ -83,7 +84,11 @@ class SubforumController extends Controller
             }
             $child->delete();
         }
-        $subforum->delete();
+        try {
+            $subforum->delete();
+        } catch (Exception $e) {
+            return redirect('admin/subforums')->with('message', 'Something went wrong!');
+        }
 
         return redirect('admin/subforums')->with('message', 'Subforum deleted');
     }

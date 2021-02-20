@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static find($topic_id)
+ * @property mixed subforum_id
+ */
 class Topic extends Model
 {
     protected $guarded=[];

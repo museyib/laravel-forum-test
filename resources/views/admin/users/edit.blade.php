@@ -37,7 +37,7 @@
                                     <select class="form-control" id="role" name="role[]" multiple>
                                         @foreach($roles as $role)
                                             <option value="{!! $role->id !!}"
-                                                    @if(in_array($role->id, $selectedroles))
+                                                    @if(in_array($role->id, $selected_roles))
                                                         selected="selected"
                                                     @endif>
                                                 {!! $role->display_name !!}
@@ -49,13 +49,17 @@
                         <div class="form-group">
                             <label for="password" class="col-lg-2 control-label">Password</label>
                             <div class="col-lg-10">
-                                <input type="password" class="form-control" name="password">
+                                <label>
+                                    <input type="password" class="form-control" name="password">
+                                </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="password" class="col-lg-2 control-label">Confirm password</label>
                             <div class="col-lg-10">
-                                <input type="password" class="form-control" name="password_confirmation">
+                                <label>
+                                    <input type="password" class="form-control" name="password_confirmation">
+                                </label>
                             </div>
                         </div>
                         <div class="form-group">

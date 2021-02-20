@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 
+/**
+ * @property mixed name
+ * @property mixed email
+ * @property mixed|string password
+ */
 class User extends Authenticatable
 {
     use Notifiable;

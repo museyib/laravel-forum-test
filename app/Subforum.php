@@ -5,6 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static find($parent_id)
+ * @method static where(string $string, $id)
+ * @property mixed parent_id
+ * @property mixed id
+ * @property mixed level
+ * @property mixed name
+ */
 class Subforum extends Model
 {
     protected $guarded=['id'];

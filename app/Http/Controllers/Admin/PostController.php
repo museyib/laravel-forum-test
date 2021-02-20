@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Post;
 use App\Topic;
 use App\Http\Controllers\Controller;
+use Exception;
 
 class PostController extends Controller
 {
     public function destroy(Post $post)
     {
-        $post->delete();
+        try {
+            $post->delete();
+        } catch (Exception $e) {
+            return back()->with('message', 'Something went wrong!');
+        }
         $topic=Topic::find($post->topic_id);
         if (count($topic->posts)>0)
         {

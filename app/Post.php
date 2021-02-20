@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed topic_id
+ */
 class Post extends Model
 {
     protected $guarded=[];

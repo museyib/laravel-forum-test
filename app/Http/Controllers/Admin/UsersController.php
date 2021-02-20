@@ -42,9 +42,9 @@ class UsersController extends Controller
     {
         $user=User::whereId($id)->firstOrFail();
         $roles=Role::all();
-        $selectedroles=$user->roles->pluck('id')->toArray();
+        $selected_roles=$user->roles->pluck('id')->toArray();
 
-        return view('admin.users.edit', compact('user', 'roles', 'selectedroles'));
+        return view('admin.users.edit', compact('user', 'roles', 'selected_roles'));
     }
 
     public function update($id, Request $request)
@@ -71,8 +71,6 @@ class UsersController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-
-        $users=User::all();
 
         return redirect('admin/users')->with('message', 'The user has been deleted.');
     }
