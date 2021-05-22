@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('title', 'Forum')
 @section('content')
-    <div class="container">
-        Forum
+<div class="container">
+    Forum
 
-        @include('forum.subforums')
-    </div>
+    @include('forum.subforums')
+</div>
 @endsection

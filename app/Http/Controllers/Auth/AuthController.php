@@ -10,20 +10,11 @@ use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
-    protected $redirectTo=[];
+    protected $redirectTo = [];
 
     public function __construct()
     {
-        $this->middleware('guest', ['except'=>'logout']);
-    }
-
-    protected function validator(array $data)
-    {
-        return Validator::make($data,[
-            'name'=>'required|max:255',
-            'email'=>'required|email|max:255|unique:users',
-            'password'=>'required|confirmed|min:6'
-        ]);
+        $this->middleware('guest', ['except' => 'logout']);
     }
 
     public function redirectToFacebook()
@@ -33,31 +24,36 @@ class AuthController extends Controller
 
     public function getFacebookCallback()
     {
-        $data=Socialite::with('facebook')->redirect();
-        $user=User::where('email', $data->email)->first();
+        $data = Socialite::with('facebook')->redirect();
+        $user = User::where('email', $data->email)->first();
 
-        if (! is_null($user))
-        {
+        if (!is_null($user)) {
             Auth::login($user);
-            $user->name=$data->user['name'];
-            $user->provider_id=$data->user['id'];
+            $user->name = $data->user['name'];
+            $user->provider_id = $data->user['id'];
             $user->save();
-        }
-        else
-        {
-            $user=User::where('provider_id', $user->user['id'])->first();
+        } else {
+            $user = User::where('provider_id', $user->user['id'])->first();
 
-            if (is_null($user))
-            {
-                $user=new User();
-                $user->name=$data->user['name'];
-                $user->email=$data->email;
-                $user->provider_id=$data->user['id'];
+            if (is_null($user)) {
+                $user = new User();
+                $user->name = $data->user['name'];
+                $user->email = $data->email;
+                $user->provider_id = $data->user['id'];
                 $user->save();
             }
             Auth::login($user);
         }
 
         return redirect('/')->with('success', 'Successfully logged in');
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6'
+        ]);
     }
 }

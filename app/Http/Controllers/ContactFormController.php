@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactFormMail;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactFormController extends Controller
@@ -15,10 +14,10 @@ class ContactFormController extends Controller
 
     public function store()
     {
-        $data=\request()->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'message'=>'required'
+        $data = \request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'message' => 'required'
         ]);
 
         Mail::to('museyib.e@gmail.com')->send(new ContactFormMail($data));

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Subforum;
 use App\Http\Controllers\Controller;
+use App\Subforum;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -11,31 +11,28 @@ class SubforumController extends Controller
 {
     public function index()
     {
-        $subforums=Subforum::all();
+        $subforums = Subforum::all();
 
         return view('admin.subforums.index', compact('subforums'));
     }
 
     public function create()
     {
-        $subforums=Subforum::all();
+        $subforums = Subforum::all();
 
         return view('admin.subforums.create', compact('subforums'));
     }
 
     public function store(Request $request)
     {
-        $subforum=new Subforum();
-        $subforum->name=$request->get('name');
-        $subforum->parent_id=$request->get('parent_id');
-        $parent=Subforum::all()->where('id', $subforum->parent_id);
-        if($parent->first()==null)
-        {
-            $subforum->level=1;
-        }
-        else
-        {
-            $subforum->level=$parent->first()->level+1;
+        $subforum = new Subforum();
+        $subforum->name = $request->get('name');
+        $subforum->parent_id = $request->get('parent_id');
+        $parent = Subforum::all()->where('id', $subforum->parent_id);
+        if ($parent->first() == null) {
+            $subforum->level = 1;
+        } else {
+            $subforum->level = $parent->first()->level + 1;
         }
 
 
@@ -51,22 +48,19 @@ class SubforumController extends Controller
 
     public function edit(Subforum $subforum)
     {
-        $subforums=Subforum::all();
+        $subforums = Subforum::all();
         return view('admin.subforums.edit', compact('subforum', 'subforums'));
     }
 
     public function update(Subforum $subforum, Request $request)
     {
-        $subforum->name=$request->get('name');
-        $subforum->parent_id=$request->get('parent_id');
-        $parent=Subforum::all()->where('id', $subforum->parent_id);
-        if($parent->first()==null)
-        {
-            $subforum->level=1;
-        }
-        else
-        {
-            $subforum->level=$parent->first()->level+1;
+        $subforum->name = $request->get('name');
+        $subforum->parent_id = $request->get('parent_id');
+        $parent = Subforum::all()->where('id', $subforum->parent_id);
+        if ($parent->first() == null) {
+            $subforum->level = 1;
+        } else {
+            $subforum->level = $parent->first()->level + 1;
         }
 
         $subforum->update();
@@ -76,10 +70,8 @@ class SubforumController extends Controller
 
     public function destroy(Subforum $subforum)
     {
-        foreach ($subforum->Childs() as $child)
-        {
-            if (count($child->childs())>0)
-            {
+        foreach ($subforum->Childs() as $child) {
+            if (count($child->childs()) > 0) {
                 $this->destroy($child);
             }
             $child->delete();

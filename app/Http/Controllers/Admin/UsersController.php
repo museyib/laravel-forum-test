@@ -2,35 +2,34 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $users=User::all();
+        $users = User::all();
         return view('admin.users.index', compact('users'));
     }
 
     public function create()
     {
-        $roles=Role::all();
+        $roles = Role::all();
         return view('admin.users.create', compact('roles'));
     }
 
     public function store(Request $request)
     {
-        $user=new User();
-        $user->name=$request->get('name');
-        $user->email=$request->get('email');
-        $password=$request->get('password');
-        if(!is_null($password))
-        {
-            $user->password=Hash::make($password);
+        $user = new User();
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $password = $request->get('password');
+        if (!is_null($password)) {
+            $user->password = Hash::make($password);
         }
         $user->save();
         $user->saveRoles($request->get('role'));
@@ -40,22 +39,21 @@ class UsersController extends Controller
 
     public function edit($id)
     {
-        $user=User::whereId($id)->firstOrFail();
-        $roles=Role::all();
-        $selected_roles=$user->roles->pluck('id')->toArray();
+        $user = User::whereId($id)->firstOrFail();
+        $roles = Role::all();
+        $selected_roles = $user->roles->pluck('id')->toArray();
 
         return view('admin.users.edit', compact('user', 'roles', 'selected_roles'));
     }
 
     public function update($id, Request $request)
     {
-        $user=User::whereId($id)->firstOrFail();
-        $user->name=$request->get('name');
-        $user->email=$request->get('email');
-        $password=$request->get('password');
-        if(is_null($password))
-        {
-            $user->password=Hash::make($password);
+        $user = User::whereId($id)->firstOrFail();
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $password = $request->get('password');
+        if (is_null($password)) {
+            $user->password = Hash::make($password);
         }
         $user->save();
         $user->saveRoles($request->get('role'));

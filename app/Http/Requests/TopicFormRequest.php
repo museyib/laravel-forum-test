@@ -24,8 +24,8 @@ class TopicFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|min:3',
-            'content'=>'sometimes'
+            'title' => 'required|min:3',
+            'content' => 'sometimes'
         ];
     }
 }

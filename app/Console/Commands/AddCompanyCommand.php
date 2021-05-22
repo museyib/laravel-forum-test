@@ -29,17 +29,16 @@ class AddCompanyCommand extends Command
     public function handle()
     {
 
-        $name=$this->ask('What is the name of company?');
-        $phone=$this->ask('What is the phone number?');
+        $name = $this->ask('What is the name of company?');
+        $phone = $this->ask('What is the phone number?');
 
-        if ($this->confirm('Are you ready to insert "'.$name.'"?"'))
-        {
-            $company=Company::create([
-                'name'=>$name,
-                'phone'=>$phone
+        if ($this->confirm('Are you ready to insert "' . $name . '"?"')) {
+            $company = Company::create([
+                'name' => $name,
+                'phone' => $phone
             ]);
 
-            return $this->info('Added: '.$company->name);
+            return $this->info('Added: ' . $company->name);
         }
 
         $this->warn('No new company added');

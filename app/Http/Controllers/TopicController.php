@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TopicFormRequest;
 use App\Post;
 use App\Subforum;
 use App\Topic;
@@ -21,28 +20,28 @@ class TopicController extends Controller
 
     public function store()
     {
-        $topic=Topic::create(request()->validate([
-            'title'=>'required|min:3',
-            'subforum_id'=>'required',
-            'user_id'=>'required'
+        $topic = Topic::create(request()->validate([
+            'title' => 'required|min:3',
+            'subforum_id' => 'required',
+            'user_id' => 'required'
         ]));
 
         Post::create([
-           'content'=>request('content'),
-           'topic_id'=>$topic->id,
-           'user_id'=>request('user_id')
+            'content' => request('content'),
+            'topic_id' => $topic->id,
+            'user_id' => request('user_id')
         ]);
 
         return redirect()->route('topics.show', [
-            'parent'=>Subforum::find($topic->subforum_id),
-            'topic'=>$topic
-            ])->with('message', 'New topic created');
+            'parent' => Subforum::find($topic->subforum_id),
+            'topic' => $topic
+        ])->with('message', 'New topic created');
     }
 
     public function show($parent, $topic)
     {
-        $topic=Topic::where('id', $topic)->first();
-        $parent=Subforum::find($parent);
+        $topic = Topic::where('id', $topic)->first();
+        $parent = Subforum::find($parent);
         return view('forum.topics.show', compact('topic', 'parent'));
     }
 }

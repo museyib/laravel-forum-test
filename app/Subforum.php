@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Subforum extends Model
 {
-    protected $guarded=['id'];
+    protected $guarded = ['id'];
 
     public function topics()
     {
@@ -29,13 +29,12 @@ class Subforum extends Model
 
     public function parents()
     {
-        $id=$this->id;
-        $data=array();
-        $level=$this->level;
-        while($level>0)
-        {
-            $subforum=Subforum::find($id);
-            $id=$subforum->parent_id;
+        $id = $this->id;
+        $data = array();
+        $level = $this->level;
+        while ($level > 0) {
+            $subforum = Subforum::find($id);
+            $id = $subforum->parent_id;
 
             array_unshift($data, $subforum);
             $level--;
@@ -45,7 +44,7 @@ class Subforum extends Model
 
     public function childs()
     {
-        $data=Subforum::where('parent_id', $this->id)->get();
+        $data = Subforum::where('parent_id', $this->id)->get();
         return new Collection($data);
     }
 }

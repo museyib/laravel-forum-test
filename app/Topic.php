@@ -10,11 +10,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Topic extends Model
 {
-    protected $guarded=[];
+    protected $guarded = [];
 
     public function subforum()
     {
         return $this->belongsTo(Subforum::class);
+    }
+
+    public function lastUser()
+    {
+        if ($this->posts()->get()->last() == null) {
+            return $this->user();
+        }
+        return User::all()->where('id', $this->lastPost()->user_id)->first();
     }
 
     public function posts()
@@ -27,19 +35,9 @@ class Topic extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function lastUser()
-    {
-        if ($this->posts()->get()->last()==null)
-        {
-            return $this->user();
-        }
-        return User::all()->where('id', $this->lastPost()->user_id)->first();
-    }
-
     public function lastPost()
     {
-        if ($this->posts()->get()->last()==null)
-        {
+        if ($this->posts()->get()->last() == null) {
             return $this;
         }
         return $this->posts()->get()->last();

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Events\NewCustomerHasRegisteredEvent;
 use App\Listeners\WelcomeNewCustomerListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 

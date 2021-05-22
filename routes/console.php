@@ -17,14 +17,12 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
 
-Artisan::command('customer:company-clean', function ()
-{
+Artisan::command('customer:company-clean', function () {
     $this->info('cleaning');
 
-    \App\Company::whereDoesntHave('customers')->get()->each(function ($company)
-    {
+    \App\Company::whereDoesntHave('customers')->get()->each(function ($company) {
         $company->delete();
 
-        $this->warn('Deleted: '.$company->name);
+        $this->warn('Deleted: ' . $company->name);
     });
 })->describe('Cleans up unused companies');

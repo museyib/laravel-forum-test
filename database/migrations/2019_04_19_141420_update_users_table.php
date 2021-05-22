@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class UpdateUsersTable extends Migration
 {
@@ -13,14 +12,10 @@ class UpdateUsersTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasColumn('users', 'provider_id'))
-        {
+        if (Schema::hasColumn('users', 'provider_id')) {
 
-        }
-        else
-        {
-            Schema::table('users', function ($table)
-            {
+        } else {
+            Schema::table('users', function ($table) {
                 $table->string('provider_id')->unique()->nullable();
             });
         }
@@ -33,8 +28,7 @@ class UpdateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function ($table)
-        {
+        Schema::table('users', function ($table) {
             $table->dropColumn('provider_id');
         });
     }
