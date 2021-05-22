@@ -4,8 +4,9 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse as Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,10 +47,10 @@ class Handler extends ExceptionHandler
      *
      * @param Request $request
      * @param Exception $e
-     * @return Response
+     * @return JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
      * @throws Throwable
      */
-    public function render($request, Throwable $e): Response
+    public function render($request, Throwable $e)
     {
         return parent::render($request, $e);
     }
